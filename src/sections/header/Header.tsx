@@ -14,7 +14,9 @@ export const Header = () => {
         <h3 className="header-subtitle">
           Diciembre 03,2022 - Reserva la Cofradia.
         </h3>
-        <img src={arrow} alt="arrow" className="header-mobile-arrow" />
+        <a href="#middle">
+          <img src={arrow} alt="arrow" className="header-mobile-arrow" />
+        </a>
       </div>
       <img src={weeding3} alt="weeding" className="header-img" />
     </section>
