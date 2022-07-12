@@ -10,7 +10,9 @@
   transition: ease-in-out 0.3s;
 
   @media (max-width: 415px) {
-    width: 375px;
+    width: 300px;
+    height: 390px;
+    padding: 24px;
   }
 
   &:hover {
@@ -25,7 +27,8 @@
 
     @media (max-width: 415px) {
       padding: 5px;
-      width: 375px;
+      width: 300px;
+      height: 200px;
       grid-template-columns: repeat(4, 1fr);
     }
   }

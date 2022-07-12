@@ -9,7 +9,7 @@ export const cardItems:CardInt[] = [
         title: 'Hospedaje',
         button:true,
         buttonLabel: 'Ver Recomendación',
-        url:'https://www.google.com/',
+        url:'https://www.tripadvisor.com.mx/Hotel_Review-g1744419-d5114199-Reviews-Reserva_La_Cofradia-Comala_Pacific_Coast.html',
         img:hospedaje
 
     },
