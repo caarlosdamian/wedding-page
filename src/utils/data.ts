@@ -30,3 +30,26 @@ export const cardItems:CardInt[] = [
         img:banamex
     },
 ]
+
+export const optionsItems = [
+    {
+        id: '1b',
+        label: 'No Asistire',
+        value: 0
+    },
+    {
+        id: '2b',
+        label: 'Asistire',
+        value: 1
+    },
+    {
+        id: '3b',
+        label: '1 Invitado(s)',
+        value: 2
+    },
+    {
+        id: '4b',
+        label: '2 Invitado(s)',
+        value: 3
+    },
+]

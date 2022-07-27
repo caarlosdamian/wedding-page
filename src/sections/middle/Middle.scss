@@ -161,6 +161,7 @@
     border: 1px solid #c6754d;
     margin-top: 60px;
     position: relative;
+    z-index: 2;
     @media (max-width: 415px) {
       padding: 5px;
       width: 375px;
