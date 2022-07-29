@@ -13,7 +13,7 @@ export const Form = () => {
     dedication: "",
   });
 
-  const email = useRef();
+  const email = useRef() as React.MutableRefObject<HTMLFormElement>;
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
