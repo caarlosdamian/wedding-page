@@ -1,6 +1,4 @@
 import React from "react";
-import carlos from "../../assets/carlos.jpg";
-import mariana from "../../assets/mariana.jpg";
 import { useCountDown } from "../../hooks/useCountDown";
 import "./Middle.scss";
 
@@ -9,7 +7,7 @@ export const Middle = () => {
   return (
     <section className="middle-container" id="middle">
       <div className="middle-top-container">
-        <img src={mariana} alt="mariana" className="middle-top-profile-img" />
+        <img src='https://i.ibb.co/ZYMCBGP/1-D75-B396-1178-460-A-AFBD-94-EA2120-C206.jpg' alt="mariana" className="middle-top-profile-img" />
         <div className="middle-top-middle-container">
           <h1 className="middle-top-middle-header">Save The Date</h1>
           <h1 className="middle-top-middle-description">
@@ -18,7 +16,7 @@ export const Middle = () => {
             el otro y así sin más hemos llegado hasta aquí. 💙
           </h1>
         </div>
-        <img src={carlos} alt="carlos" className="middle-top-profile-img" />
+        <img src='https://i.ibb.co/KKkMzwh/680-D6456-5746-43-F7-ACFF-85-ADA027-B949.jpg' alt="carlos" className="middle-top-profile-img" />
       </div>
       <div className="middle-middle-container">
         <h1 className="middle-middle-header">Fiesta</h1>
