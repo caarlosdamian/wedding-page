@@ -1,8 +1,5 @@
 import React from "react";
-import weeding from "../../assets/roma.jpg";
-import weeding3 from "../../assets/paris3.jpg";
-import weeding4 from "../../assets/paris2.jpg";
-import weeding2 from "../../assets/header.svg";
+
 import arrow from "../../assets/icon-arrow-light.svg";
 import "./Header.scss";
 
@@ -18,7 +15,7 @@ export const Header = () => {
           <img src={arrow} alt="arrow" className="header-mobile-arrow" />
         </a>
       </div>
-      <img src={weeding3} alt="weeding" className="header-img" />
+      <img src='https://i.ibb.co/NTnTtcr/paris3.jpg' alt="weeding" className="header-img" />
     </section>
   );
 };
