@@ -13,9 +13,9 @@ export const Middle = () => {
         <div className="middle-top-middle-container">
           <h1 className="middle-top-middle-header">Save The Date</h1>
           <h1 className="middle-top-middle-description">
-            Nos conocemos en una era dificil.. pero eso no impidio que el amor
-            fuera creciendo,los dos teniamos sentimientos encontrados el uno por
-            el otro y asi sin mas hemos llegado hasta aqui!
+          Nos conocimos en una era difícil. pero eso no impidió que el amor
+            fuera creciendo,los dos teníamos sentimientos encontrados el uno por
+            el otro y así sin más hemos llegado hasta aquí. 💙
           </h1>
         </div>
         <img src={carlos} alt="carlos" className="middle-top-profile-img" />
