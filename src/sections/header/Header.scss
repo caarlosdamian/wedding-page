@@ -2,11 +2,19 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  margin-bottom: 40px;
+
+  @media (max-width: 420px) {
+    margin-bottom: 0;
+  }
+  @media (max-width: 321px) {
+    width: 321px;
+  }
 
   .header-label-container {
     left: 0;
     right: 0;
-    top: 650px;
+    top: 500px;
     bottom: 0;
     position: absolute;
     margin: auto;
@@ -17,6 +25,10 @@
     flex-direction: column;
     gap: 32px;
     padding: 10px;
+
+    @media (max-width: 420px) {
+      top: 350px;
+    }
 
     .header-title {
       font-family: "Montaga", serif;
@@ -30,6 +42,10 @@
 
       @media (max-width: 420px) {
         font-size: 50px;
+      }
+
+      @media (max-width: 390px) {
+        font-size: 40px;
       }
     }
 
