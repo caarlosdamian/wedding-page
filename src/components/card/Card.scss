@@ -24,6 +24,7 @@
     width: 398px;
     height: 290px;
     position: absolute;
+    object-fit: cover;
     top: -1px;
 
     @media (max-width: 415px) {
