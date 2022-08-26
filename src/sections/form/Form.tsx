@@ -1,9 +1,12 @@
-import  { useRef, useState } from "react";
+import { useRef, useState } from "react";
+import firebase from "../../firebase";
 import { optionsItems } from "../../utils/data";
+import { addDoc, collection } from "firebase/firestore";
+
 import "./Form.scss";
+import db from "../../firebase";
 
 export const Form = () => {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,11 +16,20 @@ export const Form = () => {
     dedication: "",
   });
 
+  // Add a new document with a generated id.
+
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  console.log(formData);
+
   const email = useRef() as React.MutableRefObject<HTMLFormElement>;
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(formData);
+    const docRef = await addDoc(collection(db, "invitations"), {formData});
     email.current.reset();
   };
   return (
@@ -34,28 +46,26 @@ export const Form = () => {
           <input
             className="form-input"
             type="text"
-            id="email"
+            name="name"
             placeholder="Nombre Completo"
             required
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={handleChange}
           />
           <input
             className="form-input"
             type="email"
+            name="email"
             placeholder="Email"
             required
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            onChange={handleChange}
           />
           <select
             value={formData.numberGuests}
             className="form-input"
             placeholder="Invitados"
             id="select"
-            onChange={(e) =>
-              setFormData({ ...formData, numberGuests: e.target.value })
-            }
+            name="numberGuests"
+            onChange={handleChange}
           >
             <option value="0">Invitados Confirmados</option>
             {optionsItems.map((item) => (
@@ -68,6 +78,8 @@ export const Form = () => {
             className="form-input"
             type="text"
             placeholder="Nombre Invitado"
+            name="guesstOne"
+            onChange={handleChange}
             disabled={
               formData.numberGuests === "2" || formData.numberGuests === "3"
                 ? false
@@ -82,6 +94,8 @@ export const Form = () => {
           <input
             className="form-input"
             type="text"
+            name="guesstTwo"
+            onChange={handleChange}
             placeholder="Nombre Invitado"
             disabled={formData.numberGuests === "3" ? false : true}
             required={formData.numberGuests === "3" ? true : false}
@@ -89,10 +103,9 @@ export const Form = () => {
           <textarea
             className="form-input"
             id="text-area"
+            name="dedication"
             placeholder="Dedica un mensaje"
-            onChange={(e) =>
-              setFormData({ ...formData, dedication: e.target.value })
-            }
+            onChange={handleChange}
           />
           <button type="submit" className="confirm-button">
             Confirmar
