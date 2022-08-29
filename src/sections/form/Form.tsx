@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import firebase from "../../firebase";
 import { optionsItems } from "../../utils/data";
 import { addDoc, collection } from "firebase/firestore";
 
 import "./Form.scss";
 import db from "../../firebase";
+import toast from "react-hot-toast";
 
 export const Form = () => {
   const [formData, setFormData] = useState({
@@ -22,15 +22,18 @@ export const Form = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  console.log(formData);
-
   const email = useRef() as React.MutableRefObject<HTMLFormElement>;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(formData);
-    const docRef = await addDoc(collection(db, "invitations"), {formData});
+    toast.success("Haz confirmado ir a la boda de Mariana y Carlos! 🐈‍⬛ 🐈", {
+      duration: 5000,
+      position: "top-center",
+    });
+
+    const docRef = await addDoc(collection(db, "invitations"), { formData });
     email.current.reset();
+    setFormData({ ...formData, numberGuests: "" });
   };
   return (
     <section className="form-container" id="form">
@@ -115,4 +118,3 @@ export const Form = () => {
     </section>
   );
 };
-2;

@@ -12,8 +12,8 @@ export const Footer = () => {
         Es posible hospedarse en lugar de la fiesta
       </span>
       <div className="footer-grid-container">
-        {cardItems.map((item: CardInt) => (
-          <Card card={item} />
+        {cardItems.map((item: CardInt, i) => (
+          <Card key={i} card={item} />
         ))}
       </div>
     </section>
