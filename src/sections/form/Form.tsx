@@ -22,8 +22,6 @@ export const Form = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  console.log(formData);
-
   const email = useRef() as React.MutableRefObject<HTMLFormElement>;
 
   const handleSubmit = async (e: any) => {
