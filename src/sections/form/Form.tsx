@@ -1,17 +1,16 @@
 import { useRef, useState } from "react";
-import firebase from "../../firebase";
 import { optionsItems } from "../../utils/data";
 import { addDoc, collection } from "firebase/firestore";
 
 import "./Form.scss";
 import db from "../../firebase";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 export const Form = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    numberGuests: 0,
+    numberGuests: "",
     guesstOne: "",
     guesstTwo: "",
     dedication: "",
@@ -24,17 +23,19 @@ export const Form = () => {
   };
 
   console.log(formData);
- 
+
   const email = useRef() as React.MutableRefObject<HTMLFormElement>;
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    toast.success("Haz confirmado ir a la boda de Mariana y Carlos !🐈 🐈‍⬛", {
-      position: toast.POSITION.TOP_CENTER
+    toast.success("Haz confirmado ir a la boda de Mariana y Carlos! 🐈‍⬛ 🐈", {
+      duration: 5000,
+      position: "top-center",
     });
+
     const docRef = await addDoc(collection(db, "invitations"), { formData });
     email.current.reset();
-    setFormData({...formData,numberGuests:0})
-   
+    setFormData({ ...formData, numberGuests: "" });
   };
   return (
     <section className="form-container" id="form">
@@ -85,12 +86,12 @@ export const Form = () => {
             name="guesstOne"
             onChange={handleChange}
             disabled={
-              formData.numberGuests === 2 || formData.numberGuests === 3
+              formData.numberGuests === "2" || formData.numberGuests === "3"
                 ? false
                 : true
             }
             required={
-              formData.numberGuests === 2 || formData.numberGuests === 3
+              formData.numberGuests === "2" || formData.numberGuests === "3"
                 ? true
                 : false
             }
@@ -101,8 +102,8 @@ export const Form = () => {
             name="guesstTwo"
             onChange={handleChange}
             placeholder="Nombre Invitado"
-            disabled={formData.numberGuests === 3 ? false : true}
-            required={formData.numberGuests === 3 ? true : false}
+            disabled={formData.numberGuests === "3" ? false : true}
+            required={formData.numberGuests === "3" ? true : false}
           />
           <textarea
             className="form-input"
@@ -119,4 +120,3 @@ export const Form = () => {
     </section>
   );
 };
-2;
