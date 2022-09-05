@@ -5,8 +5,12 @@ import { addDoc, collection } from "firebase/firestore";
 import "./Form.scss";
 import db from "../../firebase";
 import toast from "react-hot-toast";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export const Form = () => {
+  const [t, i18n] = useTranslation("global");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,8 +42,8 @@ export const Form = () => {
   return (
     <section className="form-container" id="form">
       <div className="card-form-container">
-        <h1 className="form-header">Confirma tu asistencia</h1>
-        <span className="error-text">Evento sin niños.*</span>
+        <h1 className="form-header">{t("message.confirm")}</h1>
+        <span className="error-text">{t("message.event")}*</span>
         <form
           ref={email}
           onSubmit={handleSubmit}
@@ -50,7 +54,7 @@ export const Form = () => {
             className="form-input"
             type="text"
             name="name"
-            placeholder="Nombre Completo"
+            placeholder={t("message.name")}
             required
             onChange={handleChange}
           />
@@ -58,7 +62,7 @@ export const Form = () => {
             className="form-input"
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder={t("message.email")}
             required
             onChange={handleChange}
           />
@@ -70,7 +74,7 @@ export const Form = () => {
             name="numberGuests"
             onChange={handleChange}
           >
-            <option value="0">Invitados Confirmados</option>
+            <option value="0">{t("message.guest")}</option>
             {optionsItems.map((item) => (
               <option key={item.id} value={item.value}>
                 {item.label}
@@ -80,7 +84,7 @@ export const Form = () => {
           <input
             className="form-input"
             type="text"
-            placeholder="Nombre Invitado"
+            placeholder={t("message.name_guest")}
             name="guesstOne"
             onChange={handleChange}
             disabled={
@@ -99,7 +103,7 @@ export const Form = () => {
             type="text"
             name="guesstTwo"
             onChange={handleChange}
-            placeholder="Nombre Invitado"
+            placeholder={t("message.name_guest")}
             disabled={formData.numberGuests === "3" ? false : true}
             required={formData.numberGuests === "3" ? true : false}
           />
@@ -107,11 +111,11 @@ export const Form = () => {
             className="form-input"
             id="text-area"
             name="dedication"
-            placeholder="Dedica un mensaje"
+            placeholder={t("message.dedicate")}
             onChange={handleChange}
           />
           <button type="submit" className="confirm-button">
-            Confirmar
+            {t("message.submit")}
           </button>
         </form>
       </div>
