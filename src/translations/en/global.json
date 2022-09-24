@@ -17,8 +17,10 @@
     "guest": "Confirmed Guests",
     "name_guest": "Guest Name",
     "submit": "Confirm",
-    "dedicate":"Dedicate a message",
-    "recomendations":"Recommendations",
-    "posible":"It is possible to stay at the party venue"
+    "dedicate": "Dedicate a message",
+    "recomendations": "Recommendations",
+    "posible": "It is possible to stay at the party venue",
+    "reservation": "We have reserved {{guestConf}} places in his honor.",
+    "limit": "Confirmation limit 25/11/2022"
   }
 }
