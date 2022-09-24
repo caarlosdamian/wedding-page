@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
-import { optionsItems } from "../../utils/data";
-import { addDoc, collection } from "firebase/firestore";
+import { useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
 
 import "./Form.scss";
 import db from "../../firebase";
@@ -20,104 +19,58 @@ export const Form = () => {
     dedication: "",
   });
 
-  // Add a new document with a generated id.
+  const queryString = window.location.search;
+  const urlParams: any = new URLSearchParams(queryString);
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const guest = urlParams.get("guest");
+  const [nameConf, setNameConf] = useState("");
+  const [guestConf, setGuestConf] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const getInfo = async () => {
+    const docRef = doc(db, "guests", `${guest}`);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const { name, guests, confirm } = docSnap.data();
+      setNameConf(name);
+      setGuestConf(guests);
+      setConfirmed(confirm);
+    } else {
+      console.log("No such document!");
+    }
   };
+  getInfo();
 
-  const email = useRef() as React.MutableRefObject<HTMLFormElement>;
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const updateConfirm = () => {
+    db.collection("guests").doc(guest).update({ confirm: true });
     toast.success("Haz confirmado ir a la boda de Mariana y Carlos! 🐈‍⬛ 🐈", {
       duration: 5000,
       position: "top-center",
     });
-
-    const docRef = await addDoc(collection(db, "invitations"), { formData });
-    email.current.reset();
-    setFormData({ ...formData, numberGuests: "" });
   };
+
   return (
     <section className="form-container" id="form">
       <div className="card-form-container">
-        <h1 className="form-header">{t("message.confirm")}</h1>
-        <span className="error-text">{t("message.event")}*</span>
-        <form
-          ref={email}
-          onSubmit={handleSubmit}
-          action=""
-          className="form-container-inputs"
+        <div className="header--form-container">
+          <h1 className="form-header">{t("message.confirm")}</h1>
+          <span className="error-text">{t("message.event")}*</span>
+        </div>
+        <div className="form-middle-container">
+          <h2 className="form-header-title">{t("message.limit")}</h2>
+          <h1 className="form-header-guest">{nameConf}</h1>
+          <h2 className="form-header-invites">
+            {t("message.reservation", { guestConf: guestConf })}
+          </h2>
+        </div>
+
+        <button
+          type="submit"
+          className="confirm-button"
+          onClick={updateConfirm}
+          disabled={confirmed}
         >
-          <input
-            className="form-input"
-            type="text"
-            name="name"
-            placeholder={t("message.name")}
-            required
-            onChange={handleChange}
-          />
-          <input
-            className="form-input"
-            type="email"
-            name="email"
-            placeholder={t("message.email")}
-            required
-            onChange={handleChange}
-          />
-          <select
-            value={formData.numberGuests}
-            className="form-input"
-            placeholder="Invitados"
-            id="select"
-            name="numberGuests"
-            onChange={handleChange}
-          >
-            <option value="0">{t("message.guest")}</option>
-            {optionsItems.map((item) => (
-              <option key={item.id} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-          <input
-            className="form-input"
-            type="text"
-            placeholder={t("message.name_guest")}
-            name="guesstOne"
-            onChange={handleChange}
-            disabled={
-              formData.numberGuests === "2" || formData.numberGuests === "3"
-                ? false
-                : true
-            }
-            required={
-              formData.numberGuests === "2" || formData.numberGuests === "3"
-                ? true
-                : false
-            }
-          />
-          <input
-            className="form-input"
-            type="text"
-            name="guesstTwo"
-            onChange={handleChange}
-            placeholder={t("message.name_guest")}
-            disabled={formData.numberGuests === "3" ? false : true}
-            required={formData.numberGuests === "3" ? true : false}
-          />
-          <textarea
-            className="form-input"
-            id="text-area"
-            name="dedication"
-            placeholder={t("message.dedicate")}
-            onChange={handleChange}
-          />
-          <button type="submit" className="confirm-button">
-            {t("message.submit")}
-          </button>
-        </form>
+          {t("message.submit")}
+        </button>
       </div>
     </section>
   );
